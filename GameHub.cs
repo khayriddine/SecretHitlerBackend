@@ -65,6 +65,18 @@ public class GameHub : Hub
         }
     }
 
+    public async Task SetAvatar(string roomId, string userId, string avatar)
+    {
+        if (_rooms.TryGetValue(roomId, out var room))
+        {
+            if (_gameService.GetGame(roomId) is Game game)
+            {
+                game.SetAvatar(userId, avatar);
+                await SendGameUpdates(roomId);
+            }
+        }
+    }
+
     // Member joins a game room
     public async Task JoinRoom(string roomId, string userId,string playerName)
     {

@@ -202,7 +202,7 @@ public class GameService
     {
         var game = GetGame(roomId);
 
-        if (game.Phase != GamePhase.ExecutingAction)
+        if (game.Phase != GamePhase.Executive)
             throw new InvalidOperationException("Not in executive phase.");
 
         if (game.CurrentExecutiveAction != ExecutiveAction.SpecialElection)

@@ -9,4 +9,5 @@ public class Player
     public bool IsConnected { get; set; } = true;
     public bool IsPresident  { get;set; }
     public bool IsChancellor { get;set;}
+    public string Avatar { get; set; }
 }

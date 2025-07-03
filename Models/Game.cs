@@ -54,6 +54,14 @@ public class Game
         }
     }
 
+    public void SetAvatar(string userId, string avatar)
+    {
+        if(Players.FirstOrDefault(elt => elt.UserId == userId) is Player player)
+        {
+            player.Avatar = avatar;
+        }
+    }
+
     public List<Role> GetRoleDistributions(int count)
     {
         if (count < 5 || count > 10)
@@ -116,6 +124,7 @@ public class Game
         var alive = AlivePlayers.ToList();
         var currentIndex = alive.FindIndex(p => p.UserId == PresidentId);
         PresidentId = alive[(currentIndex + 1) % alive.Count].UserId;
+        ChancellorId = null;
     }
 
     public void CheckWinCondition()
@@ -160,7 +169,7 @@ public class Game
         return (fascistCount, playerCount) switch
         {
             // 5-6 players
-            (3, 5 or 6) => ExecutiveAction.InvestigateLoyalty,
+            (3, 5 or 6) => ExecutiveAction.SpecialElection,
             (4 or 5, 5 or 6) => ExecutiveAction.Execution,
 
             // 7-8 players
